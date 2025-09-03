@@ -57,8 +57,6 @@ public class AchatView extends javax.swing.JFrame {
         jComboBoxLigneFact = new javax.swing.JComboBox<>();
         jDateChooserD = new com.toedter.calendar.JDateChooser();
         jButtonAdd = new javax.swing.JButton();
-        jButtonDelete = new javax.swing.JButton();
-        jButtonEdit = new javax.swing.JButton();
         jButtonHome = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableAchat = new javax.swing.JTable();
@@ -159,30 +157,6 @@ public class AchatView extends javax.swing.JFrame {
             }
         });
 
-        jButtonDelete.setBackground(new java.awt.Color(0, 0, 255));
-        jButtonDelete.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
-        jButtonDelete.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonDelete.setIcon(new javax.swing.ImageIcon("C:\\Users\\HP\\Documents\\NetBeansProjects\\JavaAppGestionFacture\\src\\images\\icons8-delete-30 (1).png")); // NOI18N
-        jButtonDelete.setText("Delete");
-        jButtonDelete.setBorder(null);
-        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeleteActionPerformed(evt);
-            }
-        });
-
-        jButtonEdit.setBackground(new java.awt.Color(0, 0, 255));
-        jButtonEdit.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
-        jButtonEdit.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonEdit.setIcon(new javax.swing.ImageIcon("C:\\Users\\HP\\Documents\\NetBeansProjects\\JavaAppGestionFacture\\src\\images\\icons8-edit-30 (1).png")); // NOI18N
-        jButtonEdit.setText("Edit");
-        jButtonEdit.setBorder(null);
-        jButtonEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditActionPerformed(evt);
-            }
-        });
-
         jButtonHome.setBackground(new java.awt.Color(0, 0, 255));
         jButtonHome.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
         jButtonHome.setForeground(new java.awt.Color(255, 255, 255));
@@ -260,8 +234,6 @@ public class AchatView extends javax.swing.JFrame {
                         .addGap(65, 65, 65)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,13 +271,9 @@ public class AchatView extends javax.swing.JFrame {
                             .addComponent(jComboBoxLigneFact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jButtonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(321, 321, 321))
+                        .addGap(405, 405, 405))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
@@ -463,14 +431,6 @@ public class AchatView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonAddActionPerformed
 
-    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDeleteActionPerformed
-
-    private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonEditActionPerformed
-
     private void jButtonHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHomeActionPerformed
         // TODO add your handling code here:
          new Home().setVisible(true);
@@ -574,8 +534,6 @@ public class AchatView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAdd;
     private javax.swing.JButton jButtonAffiche;
-    private javax.swing.JButton jButtonDelete;
-    private javax.swing.JButton jButtonEdit;
     private javax.swing.JButton jButtonHome;
     private javax.swing.JComboBox<String> jComboBoxLigneFact;
     private javax.swing.JComboBox<String> jComboBoxNomFour;

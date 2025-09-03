@@ -53,8 +53,6 @@ public class ArticleView extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButtonAdd1 = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        jComboBoxNumART = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -223,12 +221,6 @@ public class ArticleView extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel10.setText("Id :");
-
-        jComboBoxNumART.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -251,15 +243,9 @@ public class ArticleView extends javax.swing.JFrame {
                             .addComponent(jButtonAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxNumART, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNumArt, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldNumArt, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -283,11 +269,7 @@ public class ArticleView extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(13, 13, 13))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxNumART, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(98, 98, 98)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldNumArt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -319,40 +301,42 @@ public class ArticleView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldlibelleActionPerformed
 
     private void jButtonAFFicherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAFFicherActionPerformed
-        // TODO add your handling code here:
-        // TODO add your handling code here:
-// Retrieve data from the database for articles:
-ArticleController ac = new ArticleController(); // Assume you have a controller for articles
-ArrayList<Article> articles = ac.getAll(); // Fetch the list of articles
+    ArticleController ac = new ArticleController();
+    ArrayList<Article> articles = ac.getAll();
 
-// Set up the table model for articles:
-DefaultTableModel model = new DefaultTableModel();
-model.addColumn("NumArt");
-model.addColumn("Libelle");
-jTableArticle.setModel(model); // Assuming the table is for articles
+    // Ajouter les colonnes (ID + NumArt + Libelle)
+    DefaultTableModel model = new DefaultTableModel();
+    model.addColumn("ID");
+    model.addColumn("NumArt");
+    model.addColumn("Libelle");
 
-// Populate the table with article data:
-for (Article a : articles) {
-    Object[] row = new Object[]{
-        a.getNumArt(), 
-        a.getLibelle()
-    };
-    model.addRow(row);
-}
+    // Remplir la JTable
+    for (Article a : articles) {
+        Object[] row = new Object[]{
+            a.getId(),      // <-- ID de l’article
+            a.getNumArt(),
+            a.getLibelle()
+        };
+        model.addRow(row);
+    }
 
-// Adjust the table appearance:
-jTableArticle.setRowHeight(25);
-jTableArticle.setModel(model);
+    jTableArticle.setModel(model);
+    jTableArticle.setRowHeight(25);
+
+    // Optionnel : cacher la colonne ID si tu veux pas l’afficher
+    jTableArticle.getColumnModel().getColumn(0).setMinWidth(0);
+    jTableArticle.getColumnModel().getColumn(0).setMaxWidth(0);
+
 
         
         
     }//GEN-LAST:event_jButtonAFFicherActionPerformed
 
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
-        // TODO add your handling code here:
     int selectedRow = jTableArticle.getSelectedRow();
     
     if (selectedRow >= 0) {
+        // Récupérer l’ID depuis la colonne 0
         int articleId = Integer.parseInt(jTableArticle.getValueAt(selectedRow, 0).toString());
         ArticleController articleController = new ArticleController();
         boolean deleted = articleController.delete(articleId);
@@ -367,36 +351,31 @@ jTableArticle.setModel(model);
         JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne à supprimer !");
     } 
 
+
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
     private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
-     int selectedRow = jTableArticle.getSelectedRow();
+    int selectedRow = jTableArticle.getSelectedRow();
     if (selectedRow >= 0) {
-        // Récupérer les données des champs texte
         String numArtText = jTextFieldNumArt.getText().trim();
         String libelle = jTextFieldlibelle.getText().trim();
-       
-        // Validation des champs
+
         if (numArtText.isEmpty() || libelle.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs !", "Erreur", JOptionPane.ERROR_MESSAGE);
             return;
         }
-       
+
         try {
             int numArt = Integer.parseInt(numArtText);
-
-            // Récupérer l'identifiant de l'article à partir de la table
             int articleId = Integer.parseInt(jTableArticle.getValueAt(selectedRow, 0).toString());
-           
-            // Créer une instance de l'article avec les nouvelles données
+
             Article article = new Article(articleId, numArt, libelle);
 
-            // Mettre à jour via le contrôleur
-            ArticleController articleControler = new ArticleController();
-            boolean isUpdated = articleControler.update(article, articleId);
+            ArticleController articleController = new ArticleController();
+            boolean isUpdated = articleController.update(article, articleId);
 
             if (isUpdated) {
-                // Mettre à jour la table
+                // Mettre à jour la JTable
                 jTableArticle.setValueAt(numArt, selectedRow, 1);
                 jTableArticle.setValueAt(libelle, selectedRow, 2);
 
@@ -410,7 +389,7 @@ jTableArticle.setModel(model);
     } else {
         JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne à modifier !", "Erreur", JOptionPane.WARNING_MESSAGE);
     }
-   
+
         
     }//GEN-LAST:event_jButtonEditActionPerformed
 
@@ -452,12 +431,11 @@ jTableArticle.setModel(model);
     int selectedRow = jTableArticle.getSelectedRow();
     if (selectedRow >= 0) {
         // Récupérez les données de la ligne sélectionnée
-        String numArt = jTableArticle.getValueAt(selectedRow, 0).toString(); // Colonne 0 : NumArt
-        String libelle = jTableArticle.getValueAt(selectedRow, 1).toString(); // Colonne 1 : Libelle
+        String numArt = jTableArticle.getValueAt(selectedRow, 1).toString();
+        String libelle = jTableArticle.getValueAt(selectedRow, 2).toString();
 
-        // Remplissez les champs texte avec les données récupérées
         jTextFieldNumArt.setText(numArt);
-        jTextFieldlibelle.setText(libelle);
+        jTextFieldlibelle.setText(libelle);    
     }
     }//GEN-LAST:event_jTableArticleMouseClicked
 
@@ -503,9 +481,7 @@ jTableArticle.setModel(model);
     private javax.swing.JButton jButtonAdd1;
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonEdit;
-    private javax.swing.JComboBox<String> jComboBoxNumART;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

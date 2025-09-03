@@ -209,4 +209,8 @@ private int getArticleId(String numArticle, Connection conn) {
         }
         return null;
     }    
+
+    public boolean update(LigneFacture ligne) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -57,7 +57,6 @@ public class LigneFactureView extends javax.swing.JFrame {
         jTextFieldquantie = new javax.swing.JTextField();
         jButtonDelete = new javax.swing.JButton();
         jButtonADD1 = new javax.swing.JButton();
-        jButtonEdit = new javax.swing.JButton();
         jButtonHome = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableListOfLigneFactures = new javax.swing.JTable();
@@ -125,7 +124,7 @@ public class LigneFactureView extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel9.setText("NumeroArticle :");
+        jLabel9.setText("Article :");
 
         jLabel10.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 204));
@@ -164,18 +163,6 @@ public class LigneFactureView extends javax.swing.JFrame {
         jButtonADD1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonADD1ActionPerformed(evt);
-            }
-        });
-
-        jButtonEdit.setBackground(new java.awt.Color(0, 0, 255));
-        jButtonEdit.setFont(new java.awt.Font("Century Gothic", 1, 20)); // NOI18N
-        jButtonEdit.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonEdit.setIcon(new javax.swing.ImageIcon("C:\\Users\\HP\\Documents\\NetBeansProjects\\JavaAppGestionFacture\\src\\images\\icons8-edit-30 (1).png")); // NOI18N
-        jButtonEdit.setText("Edit");
-        jButtonEdit.setBorder(null);
-        jButtonEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditActionPerformed(evt);
             }
         });
 
@@ -268,7 +255,6 @@ public class LigneFactureView extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonADD1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,7 +276,7 @@ public class LigneFactureView extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
                             .addComponent(jButtonAfficher, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -314,9 +300,8 @@ public class LigneFactureView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -376,13 +361,6 @@ public class LigneFactureView extends javax.swing.JFrame {
         new Home().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonHomeActionPerformed
-
-    private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
-        // TODO add your handling code here:2
-        
-
-        
-    }//GEN-LAST:event_jButtonEditActionPerformed
 
     private void jButtonADD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonADD1ActionPerformed
         // TODO add your handling code here:
@@ -458,6 +436,27 @@ jTextFieldPrix.setText("");  // Réinitialisation du champ de prix
     
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
         // TODO add your handling code here:
+    int selectedRow = jTableListOfLigneFactures.getSelectedRow();
+
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne à supprimer.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    int id = (int) jTableListOfLigneFactures.getValueAt(selectedRow, 0);
+
+    LigneFactureController fc = new LigneFactureController();
+    int confirmation = JOptionPane.showConfirmDialog(this, "Voulez-vous vraiment supprimer cette ligne ?", "Confirmation", JOptionPane.YES_NO_OPTION);
+
+    if (confirmation == JOptionPane.YES_OPTION) {
+        if (fc.delete(id)) {
+            JOptionPane.showMessageDialog(this, "Ligne supprimée avec succès !");
+            jButtonAfficherActionPerformed(null); // Rafraîchir la liste
+        } else {
+            JOptionPane.showMessageDialog(this, "Erreur lors de la suppression.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
     private void jTextFieldquantieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldquantieActionPerformed
@@ -476,6 +475,7 @@ jTextFieldPrix.setText("");  // Réinitialisation du champ de prix
     private void jComboBoxNumARTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNumARTActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxNumARTActionPerformed
+
 
     private void fillArticleComboBox() {
     // Vider le comboBox avant de le remplir
@@ -552,7 +552,6 @@ jTextFieldPrix.setText("");  // Réinitialisation du champ de prix
     private javax.swing.JButton jButtonADD1;
     private javax.swing.JButton jButtonAfficher;
     private javax.swing.JButton jButtonDelete;
-    private javax.swing.JButton jButtonEdit;
     private javax.swing.JButton jButtonHome;
     private javax.swing.JComboBox<String> jComboBoxNumART;
     private javax.swing.JLabel jLabel1;

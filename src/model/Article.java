@@ -67,6 +67,10 @@ public class Article {
     public void afficherArticle() {
         System.out.println("Numéro: " + numArt + ", Libellé: " + libelle );
     }
+
+    public void setNumArt(String numArticle) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
    
 
